@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Untitled {
+public class Exercise10_03 {
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
