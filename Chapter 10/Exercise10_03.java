@@ -4,28 +4,39 @@ class Untitled {
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
-		String answer;
+		
+		System.out.print("Please enter two numbers separated by a space: "); 
+		
+		int value = MyInteger.parseInt(inp.next());
+		MyInteger myValue = new MyInteger(MyInteger.parseInt(inp.next()));
+		boolean cond;
 		
 		do {
-			System.out.print("Enter a number or type 'Exit' to leave the program: ");
-			answer = inp.next().trim();
-			MyInteger value = new MyInteger(MyInteger.parseInt(answer));
+			cond = true;
 			
-			System.out.print("Which condition would you like to test? \n1) Even\n2) Odd\n3) Prime\n4) Equal to\n: ");
+			System.out.print("\nWhich method would you like to test with these values? \n1) isEven() \n2) isOdd() \n3) isPrime() \n4) equals() \n: ");
 			
-			switch (input.nextInt()) {
+			switch (inp.nextInt()) {
 				case 1:
-					
+					System.out.println("\n" + value + " is an even number: " + MyInteger.isEven(value));
+					System.out.println(myValue.getValue() + " is an even number: " + myValue.isEven());
+					break;
+				case 2:
+					System.out.println("\n" + value + " is an odd number: " + MyInteger.isOdd(value));
+					System.out.println(myValue.getValue() + " is an odd number: " + myValue.isOdd());
+					break;
+				case 3:
+					System.out.println("\n" + value + " is a prime number: " + MyInteger.isPrime(value));
+					System.out.println(myValue.getValue() + " is a prime number: " + myValue.isPrime());
+					break;
+				case 4:
+					System.out.println("\n" + value + " is equal to " + myValue.getValue() + ": " + MyInteger.isEven(value));
+					break;
+				default:
+					System.out.println("\nThat isn't a valid choice. Please try again. ");
+					cond = false;
 			}
-		} while (!answer.equalsIgnoreCase("exit"));
-		
-		System.out.print("Please enter three numbers separated by spaces: "); 
-		MyInteger v1 = new MyInteger(inp.nextInt());
-		MyInteger v2 = new MyInteger(inp.nextInt());
-		MyInteger v3 = new MyInteger(MyInteger.parseInt(input.nextLine()));
-		
-		System.out.print(v1.getValue() + " " + v2.getValue() + " " + v3.getValue());
-		
+		} while (!cond);
 	}
 }
 
