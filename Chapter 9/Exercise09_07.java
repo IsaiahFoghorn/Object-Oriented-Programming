@@ -38,7 +38,7 @@ public class Exercise09_07 {
 			System.out.print("\nWould you like to...\n1) Withdraw\n2) Deposit\n3) Exit\n:");
 			answer = input.nextInt();
 			
-			if ((answer < 0) && (answer > 4)) {
+			if ((answer < 1) || (answer > 3)) {
 				answer = 0;
 				System.out.println("\nInvalid input. Please try again.");
 			}
