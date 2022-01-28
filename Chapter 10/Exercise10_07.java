@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Untitled {
+public class Exercise10_07 {
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
 		
@@ -17,7 +17,7 @@ class Untitled {
 			if ((answer >= 0) && (answer <= 9)) {
 				Prompt(account, answer);
 			} else {
-				System.out.println("That ID is invalid. Please try again. \n");
+				System.out.println("\nThat ID is invalid. Please try again. \n");
 			}
 		} while (account.length != 0);
 	}
@@ -33,20 +33,26 @@ class Untitled {
 			
 			switch (answer) {
 				case 1:
-					System.out.printf("Account Balance: $%.2f", account[id].getBalance());
+					System.out.printf("\nAccount Balance: $%.2f\n", account[id].getBalance());
 					break;
 				case 2:
-					System.out.print("How much would you like to deposit? $");
-					account[id].deposit(floatInp.nextDouble());
+					System.out.print("\nHow much would you like to withdraw? $");
+					account[id].withdraw(floatInp.nextDouble());
 					break;
 				case 3:
-					
+					System.out.print("\nHow much would you like to deposit? $");
+					account[id].deposit(floatInp.nextDouble());
+					break;
 				case 4:
-					
+					answer = 4;
+					break;
 				default:
+					System.out.println("\nThat isn't a valid option. Please try again.");
 					answer = 0;
 			}
 		} while (answer != 4);
+		
+		System.out.println("");
 	}
 }
 
