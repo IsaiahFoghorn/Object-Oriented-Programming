@@ -1,4 +1,5 @@
 import java.util.*;
+import java.sql.*;
 
 class Exercise11_01 {
 	public static void main(String[] args) {
@@ -17,5 +18,40 @@ class Exercise11_01 {
 		String filled = input.nextLine();
 		
 		System.out.printf("%.2f %.2f %.2f %s %s", sideA, sideB, sideC, color, filled);
+	}
+}
+
+class GeometricObject {
+	private String color = "white";
+	private boolean filled;
+	private java.util.Date dateCreated;
+	
+	GeometricObject() {
+		dateCreated = new java.util.Date();
+	}
+	
+	GeometricObject(String color, boolean filled) {
+		// Add code
+	}
+}
+
+class Triangle extends GeometricObject {
+	private double sideA = 1, sideB = 1, sideC = 1;
+	
+	Triangle() {
+		
+	}
+	
+	Triangle(double SideA, double SideB, double SideC) {
+		this.sideA = sideA;
+		this.sideB = sideB;
+		this.sideC = sideC;
+	}
+	
+	Triangle(double SideA, double SideB, double SideC, String color) {
+		this.sideA = sideA;
+		this.sideB = sideB;
+		this.sideC = sideC;
+		// add color and filled specifications
 	}
 }
