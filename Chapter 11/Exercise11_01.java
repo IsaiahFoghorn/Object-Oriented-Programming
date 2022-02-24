@@ -32,7 +32,13 @@ class Exercise11_01 {
 		
 		System.out.print(triang.getColor());
 		
-		System.out.print(triang.getArea());
+		GeometricObject obj = (GeometricObject)triang;
+		
+		Print((GeometricObject)obj);
+	}
+	
+	public static void Print(Object obj) {
+		System.out.print(obj.toString());
 	}
 }
 
@@ -51,27 +57,33 @@ class GeometricObject {
 		dateCreated = new java.util.Date();
 	}
 	
-	String getColor() {
+	public String getColor() {
 		return color;
 	}
 	
-	void setColor(String color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
 	
-	boolean isFilled() {
+	public boolean isFilled() {
 		return filled;
 	}
 	
-	void setFilled(boolean filled) {
+	public void setFilled(boolean filled) {
 		this.filled = filled;
 	}
 	
-	java.util.Date getDateCreated() {
+	public java.util.Date getDateCreated() {
 		return dateCreated;
 	}
 	
-	// add toString() method here
+	@Override
+	
+	public String toString() {
+		String result = "Color: " + color + "filled:" + filled + "dateCreated:" + dateCreated;
+		
+		return result;
+	}
 }
 
 class Triangle extends GeometricObject {
@@ -81,13 +93,13 @@ class Triangle extends GeometricObject {
 		
 	}
 	
-	Triangle(double SideA, double SideB, double SideC) {
+	Triangle(double sideA, double sideB, double sideC) {
 		this.sideA = sideA;
 		this.sideB = sideB;
 		this.sideC = sideC;
 	}
 	
-	Triangle(double SideA, double SideB, double SideC, String color, boolean filled) {
+	Triangle(double sideA, double sideB, double sideC, String color, boolean filled) {
 		this.sideA = sideA;
 		this.sideB = sideB;
 		this.sideC = sideC;
@@ -95,39 +107,45 @@ class Triangle extends GeometricObject {
 		setFilled(filled);
 	}
 	
-	double getSideA() {
+	public double getSideA() {
 		return sideA;
 	}
 	
-	double getSideB() {
+	public double getSideB() {
 		return sideB;
 	}
 	
-	double getSideC() {
+	public double getSideC() {
 		return sideC;
 	}
 	
-	void setSideA(double sideA) {
+	public void setSideA(double sideA) {
 		this.sideA = sideA;
 	}
 	
-	void setSideB(double sideB) {
+	public void setSideB(double sideB) {
 		this.sideB = sideB;
 	}
 	
-	void setSideC(double sideC) {
+	public void setSideC(double sideC) {
 		this.sideC = sideC;
 	}
 	
-	double getArea() {
+	public double getArea() {
 		double s = (sideA + sideB + sideC) / 2;
 		double area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
 		return area;
 	}
 	
-	double getPerimeter() {
+	public double getPerimeter() {
 		return (sideA + sideB + sideC);
 	}
 	
-	// add toString() method here
+	@Override
+	
+	public String toString() {
+		String result = "Triangle: sideA = " + sideA + " sideB = " + sideB + " sideC = " + sideC;
+		
+		return result;
+	}
 }
