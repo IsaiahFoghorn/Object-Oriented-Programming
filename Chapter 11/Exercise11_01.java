@@ -20,25 +20,9 @@ class Exercise11_01 {
 			filled = true;
 		}
 		
-		Triangle tri = new Triangle();
+		Triangle tri = new Triangle(sideA, sideB, sideC, color, filled);
 		
-		Triangle triang = new Triangle(sideA, sideB, sideC);
-		
-		Triangle triangle = new Triangle(sideA, sideB, sideC, color, filled);
-		
-		tri.setColor(color);
-		
-		System.out.print(tri.getColor());
-		
-		System.out.print(triang.getColor());
-		
-		GeometricObject obj = (GeometricObject)triang;
-		
-		Print((GeometricObject)obj);
-	}
-	
-	public static void Print(Object obj) {
-		System.out.print(obj.toString());
+		System.out.printf("%s\n\nArea: %.2f\nPerimeter: %.2f", tri.toString(), tri.getArea(), tri.getPerimeter());
 	}
 }
 
@@ -80,7 +64,7 @@ class GeometricObject {
 	@Override
 	
 	public String toString() {
-		String result = "Color: " + color + "filled:" + filled + "dateCreated:" + dateCreated;
+		String result = "\nProperties: \nColor: " + color + "\nFilled: " + filled + "\nDate Created: " + dateCreated;
 		
 		return result;
 	}
@@ -144,7 +128,7 @@ class Triangle extends GeometricObject {
 	@Override
 	
 	public String toString() {
-		String result = "Triangle: sideA = " + sideA + " sideB = " + sideB + " sideC = " + sideC;
+		String result = "\nTriangle: \nsideA = " + sideA + "\nsideB = " + sideB + "\nsideC = " + sideC + "\n" + super.toString();
 		
 		return result;
 	}
