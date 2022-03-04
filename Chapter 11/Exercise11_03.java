@@ -4,7 +4,7 @@ class Exercise09_07 {
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
 		
-		Account a1 = new Account(1122, 20000, 4.5);
+		Account a1 = new Checkings(1122, 2000, 4.5);
 		int answer = 0;
 		double amount = 0;
 		boolean leave = false;
@@ -30,7 +30,7 @@ class Exercise09_07 {
 		} while (answer != 3);
 		
 		
-		System.out.printf("\nAccount Balance: %.2f\nMonthly Interest: %.2f\nDate Created: %s", a1.getBalance(), a1.getMonthlyInterest(), a1.dateCreated());
+		System.out.printf("\n%s", a1.toString());
 	}
 	
 	public static int Prompt(int answer) {
@@ -50,15 +50,12 @@ class Exercise09_07 {
 }
 
 class Account {
-	private int id;
-	private double balance;
-	private double annualInterestRate;
+	private int id = 0;
+	private double balance = 0;
+	private double annualInterestRate = 0;
 	private java.util.Date dateCreated;
 	
 	Account() {
-		id = 0;
-		balance = 0;
-		annualInterestRate = 0;
 		dateCreated = new java.util.Date();
 	}
 	
@@ -66,56 +63,73 @@ class Account {
 		id = newID;
 		balance = newBalance;
 		annualInterestRate = newAnnualInterest;
-		dateCreated = new java.util.Date();
+		Date dateCreated = new java.util.Date();
 	}
 	
-	int getID() {
+	public int getID() {
 		return id;
 	}
 	
-	void setID(int newID) {
+	public void setID(int newID) {
 		id = newID;
 	}
 
-	double getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 	
-	void setBalance(double newBalance) {
+	public void setBalance(double newBalance) {
 		balance = newBalance;
 	}
 	
-	double getAnnualInterestRate() {
+	public double getAnnualInterestRate() {
 		return annualInterestRate;
 	}
 	
-	void setAnnualInterestRate(double newAnnualInterestRate) {
+	public void setAnnualInterestRate(double newAnnualInterestRate) {
 		annualInterestRate = newAnnualInterestRate;
 	}
 	
-	String dateCreated() {
-		return dateCreated.toString();
-	}
-	
-	double getMonthlyInterestRate() {
+	public double getMonthlyInterestRate() {
 		return annualInterestRate / 12;
 	}
 	
-	double getMonthlyInterest() {
+	public double getMonthlyInterest() {
 		return (annualInterestRate / 1200 + 1) * balance;
 	}
 	
-	void withdraw(double withdrawalAmount) {
+	public void withdraw(double withdrawalAmount) {
 		balance -= withdrawalAmount;
 	}
 	
-	void deposit(double depositAmount) {
+	public void deposit(double depositAmount) {
 		balance += depositAmount;
+	}
+	
+	public String toString() {
+		return "Account " + id + "\nBalance: " + balance + "\nAnnual Interest Rate: " + annualInterestRate + "\nCreated on " + dateCreated;
 	}
 }
 
-class CheckingsAccount extends Account {
+class Checkings extends Account {
 	private double draftLimit = 100;
+	
+	Checkings() {
+		
+	}
+	
+	Checkings(int id, double balance, double annualInterestRate) {
+		setID(id);
+		setBalance(balance);
+		setAnnualInterestRate(annualInterestRate);
+	}
+	
+	Checkings(int id, double balance, double annualInterestRate, double draftLimit) {
+		setID(id);
+		setBalance(balance);
+		setAnnualInterestRate(annualInterestRate);
+		this.draftLimit = draftLimit;
+	}
 	
 	double getLimit() {
 		return draftLimit;
@@ -125,11 +139,35 @@ class CheckingsAccount extends Account {
 		draftLimit = newLimit;
 	}
 
-	void withdraw(double amount) {
+	public void withdraw(double amount) {
 		if (amount <= (draftLimit + getBalance())) {
 			super.withdraw(amount);
 		} else {
-			System.out.print("no");
+			System.out.print("\nThe amount you wish to withdraw exceeds your account's balance and overdraft limit\n");
 		}
+	}
+	
+	public String toString() {
+		return "Checkings " + super.toString(); // add overdraft limit to this
+	}
+}
+
+class Savings extends Account {
+	Savings() {
+		
+	}
+	
+	Savings(int id, double balance, double annualInterestRate) {
+		setID(id);
+		setBalance(balance);
+		setAnnualInterestRate(annualInterestRate);
+	}
+	
+	public void withdraw(double amount) {
+		
+	}
+	
+	public String toString() {
+		return "Savings " + super.toString();
 	}
 }
