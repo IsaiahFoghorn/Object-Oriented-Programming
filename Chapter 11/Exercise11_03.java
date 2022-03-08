@@ -4,40 +4,52 @@ class Exercise09_07 {
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
 		
-		Account a1 = new Checkings(1122, 2000, 4.5);
 		int answer = 0;
 		double amount = 0;
 		boolean leave = false;
 		
-		
-		
-		System.out.printf("Account ID Number: %d\nAccount Balance: %.2f\nAnnual Interest Rate: %.2f\n", a1.getID(), a1.getBalance(), a1.getAnnualInterestRate());
-		
-		do {
-			switch (Prompt(answer)) {
+		outer: do {
+			Account acnt = new Account(0, 2000, 4.5);
+			
+			switch (Prompt("Would you like to access your checking account or your savings account? \n1) Checking \n2) Savings \n3) Exit \n: ", answer)) {
 				case 1:
-					System.out.print("\nHow much would you like to withdraw? $");
-					a1.withdraw(inp.nextDouble());
+					System.out.print("\nWhat is your account's ID? ");
+					acnt = new Checking(inp.nextInt(), 2000, 4.5);
 					break;
 				case 2:
-					System.out.print("\nHow much would you like to deposit? $");
-					a1.deposit(inp.nextDouble());
+					System.out.print("\nWhat is your account's ID? ");
+					acnt = new Savings(inp.nextInt(), 2000, 4.5);
 					break;
 				case 3:
 					answer = 3;
-					break;
+					break outer;
 			}
-		} while (answer != 3);
-		
-		
-		System.out.printf("\n%s", a1.toString());
+			
+			System.out.printf("\n%s", acnt.toString());
+			
+			do {
+				switch (Prompt("\nWould you like to...\n1) Withdraw\n2) Deposit\n3) Exit\n:", answer)) {
+					case 1:
+						System.out.print("\nHow much would you like to withdraw? $");
+						acnt.withdraw(inp.nextDouble());
+						break;
+					case 2:
+						System.out.print("\nHow much would you like to deposit? $");
+						acnt.deposit(inp.nextDouble());
+						break;
+					case 3:
+						answer = 3;
+						break;
+				}
+			} while (answer != 3);
+		} while (leave == false);
 	}
 	
-	public static int Prompt(int answer) {
+	public static int Prompt(String prompt, int answer) {
 		Scanner input = new Scanner(System.in);
 		
 		do {
-			System.out.print("\nWould you like to...\n1) Withdraw\n2) Deposit\n3) Exit\n:");
+			System.out.print(prompt);
 			answer = input.nextInt();
 			
 			if ((answer < 1) || (answer > 3)) {
@@ -63,7 +75,7 @@ class Account {
 		id = newID;
 		balance = newBalance;
 		annualInterestRate = newAnnualInterest;
-		Date dateCreated = new java.util.Date();
+		dateCreated = new java.util.Date();
 	}
 	
 	public int getID() {
@@ -111,20 +123,20 @@ class Account {
 	}
 }
 
-class Checkings extends Account {
+class Checking extends Account {
 	private double draftLimit = 100;
 	
-	Checkings() {
+	Checking() {
 		
 	}
 	
-	Checkings(int id, double balance, double annualInterestRate) {
+	Checking(int id, double balance, double annualInterestRate) {
 		setID(id);
 		setBalance(balance);
 		setAnnualInterestRate(annualInterestRate);
 	}
 	
-	Checkings(int id, double balance, double annualInterestRate, double draftLimit) {
+	Checking(int id, double balance, double annualInterestRate, double draftLimit) {
 		setID(id);
 		setBalance(balance);
 		setAnnualInterestRate(annualInterestRate);
@@ -148,7 +160,7 @@ class Checkings extends Account {
 	}
 	
 	public String toString() {
-		return "Checkings " + super.toString(); // add overdraft limit to this
+		return "Checking " + super.toString(); // add overdraft limit to this
 	}
 }
 
