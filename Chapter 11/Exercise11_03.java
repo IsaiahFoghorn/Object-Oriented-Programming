@@ -5,30 +5,29 @@ class Exercise09_07 {
 		Scanner inp = new Scanner(System.in);
 		
 		int answer = 0;
-		double amount = 0;
+		int id = 0;
 		boolean leave = false;
 		
-		outer: do {
-			Account acnt = new Account(0, 2000, 4.5);
+		do {
+			Account acnt = new Account();
 			
-			switch (Prompt("Would you like to access your checking account or your savings account? \n1) Checking \n2) Savings \n3) Exit \n: ", answer)) {
+			switch (Prompt("Would you like to access your checking account or your savings account? \n1) Checking \n2) Savings \n: ", 2)) {
 				case 1:
 					System.out.print("\nWhat is your account's ID? ");
+					
 					acnt = new Checking(inp.nextInt(), 2000, 4.5);
 					break;
 				case 2:
 					System.out.print("\nWhat is your account's ID? ");
+					
 					acnt = new Savings(inp.nextInt(), 2000, 4.5);
 					break;
-				case 3:
-					answer = 3;
-					break outer;
 			}
 			
-			System.out.printf("\n%s", acnt.toString());
+			System.out.printf("\n%s\n", acnt.toString());
 			
 			do {
-				switch (Prompt("\nWould you like to...\n1) Withdraw\n2) Deposit\n3) Exit\n:", answer)) {
+				switch (Prompt("\nWould you like to...\n1) Withdraw\n2) Deposit\n3) Check balance \n4) Exit\n: ", 4)) {
 					case 1:
 						System.out.print("\nHow much would you like to withdraw? $");
 						acnt.withdraw(inp.nextDouble());
@@ -38,21 +37,26 @@ class Exercise09_07 {
 						acnt.deposit(inp.nextDouble());
 						break;
 					case 3:
-						answer = 3;
+						System.out.printf("\nAccount Balance: $%.2f\n", acnt.getBalance());
+						break;
+					case 4:
+						answer = 4;
+						System.out.println("");
 						break;
 				}
-			} while (answer != 3);
-		} while (leave == false);
+			} while (answer != 4);
+		} while (answer != -1);
 	}
 	
-	public static int Prompt(String prompt, int answer) {
+	public static int Prompt(String prompt, int choices) {
 		Scanner input = new Scanner(System.in);
+		int answer;
 		
 		do {
 			System.out.print(prompt);
 			answer = input.nextInt();
 			
-			if ((answer < 1) || (answer > 3)) {
+			if ((answer < 1) || (answer > choices)) {
 				answer = 0;
 				System.out.println("\nInvalid input. Please try again.");
 			}
@@ -119,7 +123,7 @@ class Account {
 	}
 	
 	public String toString() {
-		return "Account " + id + "\nBalance: " + balance + "\nAnnual Interest Rate: " + annualInterestRate + "\nCreated on " + dateCreated;
+		return "Account #" + id + "\nBalance: " + balance + "\nAnnual Interest Rate: " + annualInterestRate + "\nCreated on " + dateCreated;
 	}
 }
 
@@ -155,12 +159,12 @@ class Checking extends Account {
 		if (amount <= (draftLimit + getBalance())) {
 			super.withdraw(amount);
 		} else {
-			System.out.print("\nThe amount you wish to withdraw exceeds your account's balance and overdraft limit\n");
+			System.out.print("\nThe amount you wish to withdraw exceeds your account's balance and overdraft limit.\n");
 		}
 	}
 	
 	public String toString() {
-		return "Checking " + super.toString(); // add overdraft limit to this
+		return "Checking " + super.toString() + "\n\nOverdraft Limit: $" + draftLimit;
 	}
 }
 
@@ -176,7 +180,11 @@ class Savings extends Account {
 	}
 	
 	public void withdraw(double amount) {
-		
+		if (amount <= getBalance()) {
+			super.withdraw(amount);
+		} else {
+			System.out.print("\nThe amount you wish to withdraw exceeds your account's balance.\n");
+		}
 	}
 	
 	public String toString() {
