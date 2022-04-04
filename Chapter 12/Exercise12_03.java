@@ -2,30 +2,32 @@ import java.util.Scanner;
 
 class Exercise12_03 {	
 	public static int access(int x[], int i) {
-		if ((i < 0) || (i > 98)) {
+		if ((i < 0) || (i > 99)) {
 			throw new ArrayIndexOutOfBoundsException("Out of Bounds");
+		} else {
+			return x[i];
 		}
 		
-		return x[i];
+		
 	}
 	
 	public static void main(String[] args) {
 		Scanner inp = new Scanner(System.in);
-		int[] x = new int[100];
+		int[] array = new int[100];
 		int result;
 		
 		for (int i = 0; i < 100; i++) {
-			x[i] = (int)(Math.random() * 1000);
+			array[i] = (int)(Math.random() * 1000);
 		}
 		
 		
 		try {
 			System.out.print("Test:");
-			int y = inp.nextInt();
-			access(x, y);
+			int answer = inp.nextInt();
+			access(array, answer);
 		}
-		catch (ArrayIndexOutOfBoundsException out) {
-			System.out.print(out);
+		catch (ArrayIndexOutOfBoundsException ex) {
+			System.out.print(ex);
 		}
 		System.out.print("!");
 	}
