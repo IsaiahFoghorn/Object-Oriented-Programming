@@ -1,7 +1,28 @@
 import java.util.*;
 
-class Exercise13_01 {
+class Exercise13_07 {
 	public static void main(String[] args) {
+		Scanner inp = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
+		boolean filled = false;
+		
+		System.out.print("Please enter the side lengths of a triangle separated by spaces: ");
+		double sideA = inp.nextInt();
+		double sideB = inp.nextInt();
+		double sideC = inp.nextInt();
+		
+		System.out.print("What color is the triangle? ");
+		String color = input.nextLine();
+		
+		System.out.print("Is the triangle filled? ");
+		if (input.nextLine().equalsIgnoreCase("yes")) {
+			filled = true;
+		}
+		
+		Triangle tri = new Triangle(sideA, sideB, sideC, color, filled);
+		
+		System.out.printf("%s\n\nArea: %.2f\nPerimeter: %.2f", tri.toString(), tri.getArea(), tri.getPerimeter());
+		
 		GeometricObject object1 = new Triangle(3, 4, 5);
 		GeometricObject object2 = new Triangle(4, 5, 6);
 		System.out.print(equals(object1, object2));
@@ -59,7 +80,7 @@ abstract class GeometricObject {
 	}
 }
 
-class Triangle extends GeometricObject {
+class Triangle extends GeometricObject implements Colorable {
 	private double sideA = 1, sideB = 1, sideC = 1;
 	
 	Triangle() {
@@ -121,4 +142,8 @@ class Triangle extends GeometricObject {
 		
 		return result;
 	}
+}
+
+interface Colorable {
+	
 }
