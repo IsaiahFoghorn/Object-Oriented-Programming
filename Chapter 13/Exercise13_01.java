@@ -19,17 +19,9 @@ class Exercise13_01 {
 			filled = true;
 		}
 		
-		Triangle tri = new Triangle(sideA, sideB, sideC, color, filled);
+		GeometricObject tri = new Triangle(sideA, sideB, sideC, color, filled);
 		
 		System.out.printf("%s\n\nArea: %.2f\nPerimeter: %.2f", tri.toString(), tri.getArea(), tri.getPerimeter());
-		
-		GeometricObject object1 = new Triangle(3, 4, 5);
-		GeometricObject object2 = new Triangle(4, 5, 6);
-		System.out.print(equals(object1, object2));
-	}
-	
-	public static boolean equals(GeometricObject x, GeometricObject y) {
-		return (x.getArea() == y.getArea());
 	}
 }
 
