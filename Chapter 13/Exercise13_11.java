@@ -99,4 +99,8 @@ class Octagon extends GeometricObject implements Comparable, Cloneable {
 		
 		return result;
 	}
+	
+	public int compareTo(Octagon x) {
+		
+	}
 }
