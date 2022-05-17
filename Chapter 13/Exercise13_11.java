@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Exercise13_01 {
+class Exercise13_11 {
 	public static void main(String[] args) {
 		GeometricObject object1 = new Triangle(3, 4, 5);
 		GeometricObject object2 = new Triangle(4, 5, 6);
@@ -59,65 +59,43 @@ abstract class GeometricObject {
 	}
 }
 
-class Triangle extends GeometricObject {
-	private double sideA = 1, sideB = 1, sideC = 1;
+class Octagon extends GeometricObject implements Comparable, Cloneable {
+	private double sideLengths = 1;
 	
-	Triangle() {
+	Octagon() {
 		
 	}
 	
-	Triangle(double sideA, double sideB, double sideC) {
-		this.sideA = sideA;
-		this.sideB = sideB;
-		this.sideC = sideC;
+	Octagon(double sideLengths) {
+		this.sideLengths = sideLengths;
 	}
 	
-	Triangle(double sideA, double sideB, double sideC, String color, boolean filled) {
-		this.sideA = sideA;
-		this.sideB = sideB;
-		this.sideC = sideC;
+	Octagon(double sideLengths, String color, boolean filled) {
+		this.sideLengths = sideLengths;
 		setColor(color);
 		setFilled(filled);
 	}
 	
-	public double getSideA() {
-		return sideA;
+	public double getSideLengths() {
+		return this.sideLengths;
 	}
 	
-	public double getSideB() {
-		return sideB;
-	}
-	
-	public double getSideC() {
-		return sideC;
-	}
-	
-	public void setSideA(double sideA) {
-		this.sideA = sideA;
-	}
-	
-	public void setSideB(double sideB) {
-		this.sideB = sideB;
-	}
-	
-	public void setSideC(double sideC) {
-		this.sideC = sideC;
+	public void setSideLengths(double sideLengths) {
+		this.sideLengths = sideLengths;
 	}
 	
 	public double getArea() {
-		double s = (sideA + sideB + sideC) / 2;
-		double area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
-		return area;
+		return (2 + (4 / Math.sqrt(2))) * Math.pow(sideLengths, 2);
 	}
 	
 	public double getPerimeter() {
-		return (sideA + sideB + sideC);
+		return sideLengths * 8;
 	}
 	
 	@Override
 	
 	public String toString() {
-		String result = "\nTriangle: \nsideA = " + sideA + "\nsideB = " + sideB + "\nsideC = " + sideC + "\n" + super.toString();
+		String result = "\nObjects: ";
 		
 		return result;
 	}
