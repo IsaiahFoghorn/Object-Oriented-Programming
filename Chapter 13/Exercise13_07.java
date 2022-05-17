@@ -5,40 +5,41 @@ class Exercise13_01 {
 		Scanner inp = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
 		boolean filled = false;
-		GeometricObject[] objects = new Triangle[5];
+		GeometricObject[] objects = new Triangle[2];
 		
 		for (int i = 0; i < objects.length; i++) {
-			try {
-				if (objects[i - 1].getArea() == 0) {
-					i--;
-					System.out.println("\nThat triangle is invalid. Please try again.\n");
-				}
-			} catch (ArrayIndexOutOfBoundsException ex) {
-				
-			} catch (NullPointerException ex) {
-				
-			}
-			
 			System.out.print("Please enter side lengths for triangle #" + (i + 1) + " separated by spaces: ");
 			double sideA = inp.nextInt();
 			double sideB = inp.nextInt();
 			double sideC = inp.nextInt();
 			
+			if (((sideA + sideB) <= sideC) || ((sideB + sideC) <= sideA) || ((sideC + sideA) <= sideB)) {
+				i--;
+				System.out.println("\nThat triangle is invalid. Please try again.\n");
+				continue;
+			} else {
+				objects[i] = new Triangle(sideA, sideB, sideC);
+			}
+			
 			System.out.print("What color is the triangle? ");
 			String color = input.nextLine();
 			
-			System.out.print("Is the triangle filled? ");
-			if (input.nextLine().equalsIgnoreCase("yes")) {
-				filled = true;
+			if (!color.equals("")) {
+				objects[i].setColor(color);
 			}
 			
-			objects[i] = new Triangle(sideA, sideB, sideC, color, filled);
+			System.out.print("Is the triangle filled? ");
+			if (input.nextLine().equalsIgnoreCase("yes")) {
+				objects[i].setFilled(true);
+			}
 			
-			
+			System.out.println("");
 		}
 		
-		System.out.print("a");
-		//System.out.printf("%s\n\nArea: %.2f\nPerimeter: %.2f", tri.toString(), tri.getArea(), tri.getPerimeter());
+		for (int i = 0; i < objects.length; i++) {
+			System.out.printf("Triangle %s: %s\nHow to Color: %s\n\nArea: %.2f\nPerimeter: %.2f\n\n", (i + 1), objects[i].toString(), ((Colorable)objects[i]).howToColor(), objects[i].getArea(), objects[i].getPerimeter());
+		}
+		
 	}
 }
 
@@ -89,7 +90,7 @@ abstract class GeometricObject {
 	}
 }
 
-class Triangle extends GeometricObject {
+class Triangle extends GeometricObject implements Colorable {
 	private double sideA = 1, sideB = 1, sideC = 1;
 	
 	Triangle() {
@@ -134,6 +135,8 @@ class Triangle extends GeometricObject {
 		this.sideC = sideC;
 	}
 	
+	@Override
+	
 	public String howToColor() {
 		if (this.getColor().equalsIgnoreCase("white")) {
 			return "Don't color";
@@ -157,7 +160,7 @@ class Triangle extends GeometricObject {
 	@Override
 	
 	public String toString() {
-		String result = "\nTriangle: \nsideA = " + sideA + "\nsideB = " + sideB + "\nsideC = " + sideC + "\n" + super.toString();
+		String result = "\nsideA = " + sideA + "\nsideB = " + sideB + "\nsideC = " + sideC + "\n" + super.toString();
 		
 		return result;
 	}
