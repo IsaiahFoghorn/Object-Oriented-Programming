@@ -5,7 +5,7 @@ class Exercise13_01 {
 		Scanner inp = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
 		boolean filled = false;
-		GeometricObject[] objects = new Triangle[2];
+		GeometricObject[] objects = new Triangle[5];
 		
 		for (int i = 0; i < objects.length; i++) {
 			System.out.print("Please enter side lengths for triangle #" + (i + 1) + " separated by spaces: ");
