@@ -1,18 +1,15 @@
 import java.util.*;
+import java.lang.*;
 
 class Exercise13_11 {
 	public static void main(String[] args) {
-		GeometricObject object1 = new Triangle(3, 4, 5);
-		GeometricObject object2 = new Triangle(4, 5, 6);
-		System.out.print(equals(object1, object2));
-	}
-	
-	public static boolean equals(GeometricObject x, GeometricObject y) {
-		return (x.getArea() == y.getArea());
+		Octagon object1 = new Octagon(4);
+		Octagon object2 = (Octagon)object1.clone();
+		System.out.print(((Octagon)object1).compareTo((Octagon)object2));
 	}
 }
 
-abstract class GeometricObject {
+abstract class GeometricObject extends Object {
 	private String color = "white";
 	private boolean filled;
 	private java.util.Date dateCreated;
@@ -59,7 +56,7 @@ abstract class GeometricObject {
 	}
 }
 
-class Octagon extends GeometricObject implements Comparable, Cloneable {
+class Octagon extends GeometricObject implements Cloneable, Comparable<Octagon> {
 	private double sideLengths = 1;
 	
 	Octagon() {
@@ -92,15 +89,34 @@ class Octagon extends GeometricObject implements Comparable, Cloneable {
 		return sideLengths * 8;
 	}
 	
+	
+	@Override
+	
+	public int compareTo(Octagon o) {
+		if (getSideLengths() < o.getSideLengths()) {
+			return -1;
+		} else if (getSideLengths() > o.getSideLengths()) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	@Override
+	
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException ex) {
+			return null;
+		}
+	}
+	
 	@Override
 	
 	public String toString() {
-		String result = "\nObjects: ";
+		String result = "\nSide Lengths: " + sideLengths + "\n" + super.toString();
 		
 		return result;
-	}
-	
-	public int compareTo(Octagon x) {
-		
 	}
 }
